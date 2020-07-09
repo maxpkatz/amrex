@@ -162,8 +162,8 @@ if (CUDA_LTO)
     set(_nvcc_arch_flags_org ${_nvcc_arch_flags})
     foreach (_item IN LISTS _nvcc_arch_flags_org)
        string(REGEX MATCH "[0-9]+" _cuda_compute_capability "${_item}")
-       string(REPLACE "code=sm_${_cuda_compute_capability}"
-                      "code=lto_${_cuda_compute_capability}"
+       string(REPLACE "${_item}"
+                      "-dlto -arch=sm_${_cuda_compute_capability}"
               _nvcc_arch_flags "${_nvcc_arch_flags}")
     endforeach ()
 endif ()
